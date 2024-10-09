@@ -1,0 +1,26 @@
+# app
+fastapi==0.115.0
+fastapi-filter==2.0.0
+loguru==0.6.0
+pydantic==2.9.2
+uvicorn==0.31.0
+
+# db
+sqlalchemy==2.0.35 
+alembic==1.13.3
+psycopg2-binary==2.9.2
+asyncpg==0.26.0
+sqlalchemy-utils==0.41.2
+greenlet==1.1.2
+
+# testing
+pytest==7.1.1
+anyio==3.6.1
+httpx==0.23.0
+asgi-lifespan==1.0.1
+
+# settings
+python-dotenv==0.20.0
+
+# formatting
+black==24.8.0
