@@ -32,17 +32,17 @@ services:
         ipv4_address: 192.168.0.3
 
 
-  fastapi_server:
-    container_name: fastapi_server
+  backend:
+    container_name: backend
     build: 
-      context: ./fastapi_server
+      context: ./backend
       dockerfile: Dockerfile
-    working_dir: /fastapi_server
+    working_dir: /backend
     ports:
       - "8000:8000"
     command: bash -c "uvicorn app.fastapi_server:app --reload --workers 1 --host 0.0.0.0 --port 8000 --log-level debug"
     volumes:
-     - ./fastapi_server:/fastapi_server    # used for live reloading of container to changes in app on local machine
+     - ./backend:/backend    # used for live reloading of container to changes in app on local machine
     env_file:
       - .env
     depends_on:
@@ -51,9 +51,11 @@ services:
       family_network:
         ipv4_address: 192.168.0.4
 
+
 volumes:
   pgdata:
   pgadmin-data:
+
 
 networks:
   family_network:

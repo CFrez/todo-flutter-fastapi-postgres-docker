@@ -10,8 +10,8 @@ TODO:
         2. create tag metadata with pydantic
 
     * module lvl:
-        	1. improve validation for dates in pydantic,
-            only accepts datetimes without the 'Z' suffix.
+        1. improve validation for dates in pydantic,
+        only accepts datetimes without the 'Z' suffix.
 
 @Author: Lukas Reinhardt
 @Maintainer: Lukas Reinhardt
