@@ -20,6 +20,9 @@ class BaseFilter(Filter):
     created_at__lte: datetime | None = None
     updated_at__gte: datetime | None = None
     updated_at__lte: datetime | None = None
+    # TODO: Which option is better?
+    is_deleted: bool | None = False  # hybrid_property
+    deleted_at__isnull: bool | None = False
 
     # Default ordering by updated_at with most recent first
     order_by: list[str] = ["-updated_at"]

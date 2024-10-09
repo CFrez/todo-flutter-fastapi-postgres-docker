@@ -5,6 +5,7 @@ import uuid
 
 from sqlalchemy import Column, UUID, TIMESTAMP
 from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import declarative_base
 
 
@@ -16,6 +17,15 @@ class BaseModel:
     updated_at = Column(
         TIMESTAMP(timezone=True), default=dt.datetime.now(), onupdate=dt.datetime.now()
     )
+    # TODO: verify if ondelete is a thing....
+    deleted_at = Column(
+        TIMESTAMP(timezone=True), nullable=True, ondelete=dt.datetime.now()
+    )
+
+    @hybrid_property
+    def is_deleted(self) -> bool:
+        """Check if task is deleted."""
+        return self.deleted_at is not None
 
     __name__: str
 

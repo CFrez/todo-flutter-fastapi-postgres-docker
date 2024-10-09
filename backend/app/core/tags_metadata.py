@@ -18,21 +18,12 @@ class MetaDataTag(BaseSchema):
     description: Optional[str] = None
     external_docs: Optional[ExternalDocs] = None
 
-    class COnfig:
-
+    class Config:
         allow_population_by_field_name = True
         fields = {"external_docs": {"alias": "externalDocs"}}
 
 
 ## ===== Tags Metadata Definition ===== ##
-parents_tag = MetaDataTag(
-    name="parents", description="Example description for parent endpoints."
-)
+tasks_tag = MetaDataTag(name="tasks", description="All tasks that need to be done.")
 
-children_tag = MetaDataTag(
-    name="children",
-    description="Stuff that you would want to know about this endpoint.",
-)
-
-
-metadata_tags = [parents_tag, children_tag]
+metadata_tags = [tasks_tag]
