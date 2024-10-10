@@ -17,8 +17,7 @@ class Task(Base):
     due_date = Column(Date, nullable=True)
     is_completed = Column(Boolean, default=False)
 
-    # Does this work.....?
     parent_id = Column(UUID, ForeignKey("task.id"), nullable=True)
-    parent = relationship("Task", back_populates="sub_tasks")
+    parent = relationship("Task", back_populates="sub_tasks", remote_side="Task.id")
 
     sub_tasks = relationship("Task", back_populates="parent")
