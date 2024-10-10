@@ -3,7 +3,7 @@ import uuid
 
 from fastapi_filter.contrib.sqlalchemy import Filter
 
-from backend.app.db.models.tasks import Task
+from app.db.models.tasks import Task
 
 from .base import BaseFilter
 

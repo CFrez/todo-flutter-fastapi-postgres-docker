@@ -18,9 +18,7 @@ class BaseModel:
         TIMESTAMP(timezone=True), default=dt.datetime.now(), onupdate=dt.datetime.now()
     )
     # TODO: verify if ondelete is a thing....
-    deleted_at = Column(
-        TIMESTAMP(timezone=True), nullable=True, ondelete=dt.datetime.now()
-    )
+    deleted_at = Column(TIMESTAMP(timezone=True), nullable=True)
 
     @hybrid_property
     def is_deleted(self) -> bool:

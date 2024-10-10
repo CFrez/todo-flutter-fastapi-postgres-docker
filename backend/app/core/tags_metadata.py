@@ -19,8 +19,7 @@ class MetaDataTag(BaseSchema):
     external_docs: Optional[ExternalDocs] = None
 
     class Config:
-        allow_population_by_field_name = True
-        fields = {"external_docs": {"alias": "externalDocs"}}
+        populate_by_name = True
 
 
 ## ===== Tags Metadata Definition ===== ##

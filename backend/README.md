@@ -78,24 +78,24 @@ In testing, newest revision will be applied automatically before test runs.
 To run migrations manually before spinning up the docker containers, go to ```/``` and:
 * Create new revision:
 ```
-docker-compose run fastapi_server alembic revision --autogenerate -m "The hottest new db changes around"
+docker-compose run backend alembic revision --autogenerate -m "The hottest new db changes around"
 ```
 This will try to capture the newest changes automatically.
 Check that the changes were correctly mapped by looking into 
-the revision file in ```/fastapi_server/migrations/versions```.
+the revision file in ```/backend/migrations/versions```.
 Revisions can be created manually to if needed.
 * Apply migrations:
 ```
-docker-compose run fastapi_server alembic upgrade head
+docker-compose run backend alembic upgrade head
 ```
 If you get an error like *Target database is not up to date.* you might have to 
 manually tell alembic that the current migration represents the state of the database
-with ```docker-compose run fastapi_server alembic stamp head``` before upgrading again.
+with ```docker-compose run backend alembic stamp head``` before upgrading again.
 
 ### Testing
 Head to ```/src``` folder and run:
 ```
-docker-compose run fastapi_server pytest .
+docker-compose run backend pytest .
 ```
 
 ### Web Routes & Documentation

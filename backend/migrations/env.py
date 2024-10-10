@@ -14,7 +14,7 @@ from sqlalchemy.pool import NullPool
 sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 from app.core.config import get_app_settings
 from app.db.models.base import Base
-from app.db.models.metadata import metadata_family
+from app.db.models.metadata import metadata_obj
 
 
 settings = get_app_settings()

@@ -1,6 +1,6 @@
-"""Domain Repository for 'parent' entity.
+"""Domain Repository for 'task' entity.
 
-All logic related to the parent entity is defined and grouped here.
+All logic related to the task entity is defined and grouped here.
 """
 
 from typing import List
@@ -15,13 +15,13 @@ from app.api.filters.tasks import TaskFilter
 from app.db.repositories.base import SQLAlchemyRepository
 
 
-class ParentRepository(SQLAlchemyRepository):
-    """Handle all logic related to Parent entity.
+class TasksRepository(SQLAlchemyRepository):
+    """Handle all logic related to Task entity.
 
     Inheritence from 'SQLAlchemyRepository' allows for crudl functionality.
     """
 
-    label = "parent"
+    label = "task"
 
     sqla_model = TaskModel
 
@@ -33,7 +33,7 @@ class ParentRepository(SQLAlchemyRepository):
         self,
         id,
     ) -> TaskModel | None:
-        """Get task with their subtasks by id."""
+        """Read task with their subtasks by id."""
         query = select(self.sqla_model).options(selectinload(self.sqla_model.sub_tasks))
         result = await self.db.execute(query)
         if not result:
@@ -44,7 +44,7 @@ class ParentRepository(SQLAlchemyRepository):
         self,
         list_filter: filter_schema,
     ) -> List[sqla_model] | None:
-        """Get all parents with their children."""
+        """List all tasts with their sub-tasks."""
         query = select(self.sqla_model).options(selectinload(self.sqla_model.sub_tasks))
         query = list_filter.filter(query)
         query = list_filter.sort(query)
