@@ -50,7 +50,10 @@ class TasksRepository(SQLAlchemyRepository):
             id: uuid.UUID,
             delete_sub_tasks: bool = False,
     ) -> TaskModel | None:
-        """Update `deleted_at` and then null `parent_id` or update `deleted_at` any subtasks"""
+        """Update `deleted_at` for task.
+         
+           Then null `parent_id` or update `deleted_at` for any subtask.
+        """
         query = select(self.sqla_model, id).options(selectinload(self.sqla_model.sub_tasks))
         result = await self.db.execute(query)
 
