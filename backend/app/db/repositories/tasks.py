@@ -37,7 +37,7 @@ class TasksRepository(SQLAlchemyRepository):
         id: uuid.UUID,
     ) -> TaskModel | None:
         """Read task with their subtasks by id."""
-        # TODO: This may not filter out the "deleted" `sub_tasks``
+        # TODO: This may not filter out the "deleted" `sub_tasks`
         query = select(self.sqla_model, id).options(
             selectinload(self.sqla_model.sub_tasks)
         )
@@ -55,7 +55,7 @@ class TasksRepository(SQLAlchemyRepository):
     ) -> TaskModel | None:
         """Update `deleted_at` for task.
 
-        Then null `parent_id` or update `deleted_at` for any subtask.
+        For all `sub_tasks`, null `parent_id` or update `deleted_at`.
         """
         query = select(self.sqla_model, id).options(
             selectinload(self.sqla_model.sub_tasks)
@@ -67,6 +67,8 @@ class TasksRepository(SQLAlchemyRepository):
 
         result.deleted_at = dt.datetime.now()
 
+        # TODO: does this work as a way to update the subtasks since it is directly
+        # manipulating them in the database?
         for sub_task in result.sub_tasks:
             if delete_sub_tasks:
                 sub_task.deleted_at = dt.datetime.now()
