@@ -1,6 +1,7 @@
 """Abstract CRUD Repo definitions."""
 
 from abc import ABC
+import datetime as dt
 from typing import List, TypeVar
 
 from fastapi import HTTPException, status
@@ -122,7 +123,7 @@ class SQLAlchemyRepository(ABC):
         if not result:
             raise self.not_found_error(id, "delete")
 
-        await self.db.delete(result)
+        result.deleted_at = dt.datetime.now()
         await self.db.commit()
 
         # TODO: check if result in string broke once converting to f-string

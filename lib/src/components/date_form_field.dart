@@ -1,3 +1,4 @@
+import 'package:family/src/components/clear_button.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
@@ -6,10 +7,11 @@ import 'package:flutter/material.dart';
 // It is required to be wrapped in a Form widget
 class FutureDateFormField extends StatelessWidget {
   final DateTime? initialValue;
-  final Function(DateTime) onChanged;
+  final Function(DateTime?) onChanged;
   final FormFieldValidator<String>? validator;
   final String labelText;
   final IconData icon;
+  final bool isClearable;
 
   // TODO: This doesn't show updated date when the date is changed
 
@@ -20,6 +22,7 @@ class FutureDateFormField extends StatelessWidget {
     this.validator,
     this.labelText = 'Date',
     this.icon = Icons.calendar_today,
+    this.isClearable = true,
   });
 
   String? _formatDate(DateTime? date) {
@@ -30,7 +33,11 @@ class FutureDateFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
         initialValue: _formatDate(initialValue),
-        decoration: InputDecoration(icon: Icon(icon), labelText: labelText),
+        decoration: InputDecoration(
+          icon: Icon(icon),
+          labelText: labelText,
+          suffixIcon: isClearable ? ClearButton(onChanged: onChanged) : null,
+        ),
         readOnly: true, // when true user cannot edit text
         validator: validator,
         onTap: () async {

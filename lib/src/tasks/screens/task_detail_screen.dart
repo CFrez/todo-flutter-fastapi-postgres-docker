@@ -1,8 +1,10 @@
-import 'package:family/src/components/checkbox_form_field.dart';
-import 'package:family/src/components/date_form_field.dart';
+import 'package:family/src/components/clear_button.dart';
+import 'package:family/src/tasks/components/tasks_dropdown.dart';
 import 'package:flutter/material.dart';
 
 import 'package:family/main.dart';
+import 'package:family/src/components/checkbox_form_field.dart';
+import 'package:family/src/components/date_form_field.dart';
 import 'package:family/src/tasks/providers/task_details_provider.dart';
 
 class TaskDetailScreen extends StatefulWidget {
@@ -78,6 +80,8 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                   decoration: InputDecoration(
                     labelText: 'Description',
                     icon: Icon(Icons.description),
+                    suffixIcon:
+                        ClearButton(onChanged: detailsProvider.setDescription),
                   ),
                   maxLines: 3, //or
                   onChanged: detailsProvider.setDescription,
@@ -92,6 +96,11 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                 FutureDateFormField(
                     initialValue: detailsProvider.task.dueDate,
                     onChanged: detailsProvider.setDueDate),
+                SizedBox(height: 8),
+                TasksDropdown(
+                    labelText: 'Parent Task',
+                    initialTaskId: detailsProvider.task.parentId,
+                    onChanged: detailsProvider.setParentId),
                 SizedBox(height: 24),
                 if (detailsProvider.isProcessing)
                   Center(

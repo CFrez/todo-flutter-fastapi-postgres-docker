@@ -26,9 +26,10 @@ abstract class TaskDetailsProvider extends ChangeNotifier {
 
   // Setters
   void setTitle(String title);
-  void setDescription(String description);
+  void setDescription(String? description);
   void setDueDate(DateTime? dueDate);
   void setIsCompleted(bool? completed);
+  void setParentId(String? parentId);
 }
 
 class TaskDetailsProviderImpl extends TaskDetailsProvider {
@@ -37,31 +38,31 @@ class TaskDetailsProviderImpl extends TaskDetailsProvider {
   }
 
   @override
-  Task get task => _task;
+  get task => _task;
 
   @override
-  bool get isProcessing => _isProcessing;
+  get isProcessing => _isProcessing;
 
   @override
-  GlobalKey<FormState> get form => _form;
+  get form => _form;
 
   @override
-  List<Task> get subTasks => _task.subTasks;
+  get subTasks => _task.subTasks;
 
   @override
-  void clearTask() {
+  clearTask() {
     _task = Task();
     handleUpdate();
   }
 
   @override
-  void setTask(Task task) {
+  setTask(Task task) {
     _task = task;
     handleUpdate();
   }
 
   @override
-  void refreshTask() async {
+  refreshTask() async {
     if (_task.id == null) {
       return;
     }
@@ -72,7 +73,7 @@ class TaskDetailsProviderImpl extends TaskDetailsProvider {
   }
 
   @override
-  Future<Task?> saveTask() async {
+  saveTask() async {
     if (!_form.currentState!.validate()) {
       handleUpdate();
       return null;
@@ -88,7 +89,7 @@ class TaskDetailsProviderImpl extends TaskDetailsProvider {
   }
 
   @override
-  Future<void> deleteTask(Task task) async {
+  deleteTask(task) async {
     _isProcessing = true;
     await tasksService.deleteTask(task);
     _isProcessing = false;
@@ -97,7 +98,7 @@ class TaskDetailsProviderImpl extends TaskDetailsProvider {
   }
 
   @override
-  String? validateTitle(String? value) {
+  validateTitle(value) {
     if (value == null || value.isEmpty) {
       return 'Task Title is Required';
     }
@@ -105,19 +106,19 @@ class TaskDetailsProviderImpl extends TaskDetailsProvider {
   }
 
   @override
-  void setTitle(String title) {
+  setTitle(title) {
     _task.title = title;
     handleUpdate();
   }
 
   @override
-  void setDescription(String description) {
+  setDescription(description) {
     _task.description = description;
     handleUpdate();
   }
 
   @override
-  void setDueDate(DateTime? dueDate) {
+  setDueDate(dueDate) {
     _task.dueDate = dueDate;
     handleUpdate();
   }
@@ -125,6 +126,12 @@ class TaskDetailsProviderImpl extends TaskDetailsProvider {
   @override
   setIsCompleted(completed) {
     _task.isCompleted = completed ?? _task.isCompleted;
+    handleUpdate();
+  }
+
+  @override
+  setParentId(parentId) {
+    _task.parentId = parentId;
     handleUpdate();
   }
 }
