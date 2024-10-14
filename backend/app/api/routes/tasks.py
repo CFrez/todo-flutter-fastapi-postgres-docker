@@ -50,10 +50,10 @@ async def update_task(
 @router.delete("/{task_id}/", response_model=TaskInDB)
 async def delete_task(
     task_id: uuid.UUID,
-    delete_sub_trasks: bool,
+    delete_sub_tasks: bool,
     task_repo: TasksRepository = Depends(get_repository(TasksRepository)),
 ) -> TaskInDB:
-    result = await task_repo.delete_and_update_sub_tasks(id=task_id, delete_sub_tasks=delete_sub_trasks)
+    result = await task_repo.delete_and_update_sub_tasks(id=task_id, delete_sub_tasks=delete_sub_tasks)
     return TaskInDB.model_validate(result)
 
 
