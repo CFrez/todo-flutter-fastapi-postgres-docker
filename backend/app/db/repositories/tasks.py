@@ -7,6 +7,7 @@ from typing import List
 import datetime as dt
 import uuid
 
+from loguru import logger
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
@@ -37,24 +38,28 @@ class TasksRepository(SQLAlchemyRepository):
     ) -> TaskModel | None:
         """Read task with their subtasks by id."""
         # TODO: This may not filter out the "deleted" `sub_tasks``
-        query = select(self.sqla_model, id).options(selectinload(self.sqla_model.sub_tasks))
+        query = select(self.sqla_model, id).options(
+            selectinload(self.sqla_model.sub_tasks)
+        )
         result = await self.db.execute(query)
 
         if not result:
             raise self.not_found_error(id, "read with sub_tasks")
-        
+
         return result.scalars().first()
-    
+
     async def delete_and_update_sub_tasks(
-            self,
-            id: uuid.UUID,
-            delete_sub_tasks: bool = False,
+        self,
+        id: uuid.UUID,
+        delete_sub_tasks: bool = False,
     ) -> TaskModel | None:
         """Update `deleted_at` for task.
-         
-           Then null `parent_id` or update `deleted_at` for any subtask.
+
+        Then null `parent_id` or update `deleted_at` for any subtask.
         """
-        query = select(self.sqla_model, id).options(selectinload(self.sqla_model.sub_tasks))
+        query = select(self.sqla_model, id).options(
+            selectinload(self.sqla_model.sub_tasks)
+        )
         result = await self.db.execute(query)
 
         if not result:
@@ -63,7 +68,7 @@ class TasksRepository(SQLAlchemyRepository):
         result.deleted_at = dt.datetime.now()
 
         for sub_task in result.sub_tasks:
-            if (delete_sub_tasks):
+            if delete_sub_tasks:
                 sub_task.deleted_at = dt.datetime.now()
             else:
                 sub_task.parent_id = None
@@ -76,8 +81,6 @@ class TasksRepository(SQLAlchemyRepository):
         )
 
         return result
-
-
 
     async def list_tasks_with_sub_tasks(
         self,
