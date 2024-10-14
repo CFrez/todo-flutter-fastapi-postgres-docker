@@ -1,4 +1,4 @@
-# WIP Family App
+# WIP ToDo App
 
 This is a project using for learning Flutter and assembling it with the backend.
 
