@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:family/src/tasks/task_model.dart';
-import 'package:family/src/tasks/tasks_service.dart';
+import 'package:todo/src/tasks/task_model.dart';
+import 'package:todo/src/tasks/tasks_service.dart';
 
 abstract class TasksListProvider extends ChangeNotifier {
   bool isLoading = true;

@@ -5,8 +5,8 @@ import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 
-import 'package:family/src/tasks/providers/task_details_provider.dart';
-import 'package:family/src/tasks/providers/tasks_list_provider.dart';
+import 'package:todo/src/tasks/providers/task_details_provider.dart';
+import 'package:todo/src/tasks/providers/tasks_list_provider.dart';
 
 GetIt getIt = GetIt.instance;
 

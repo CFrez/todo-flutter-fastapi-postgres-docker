@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:family/main.dart';
-import 'package:family/src/tasks/screens/task_detail_screen.dart';
-import 'package:family/src/tasks/task_model.dart';
-import 'package:family/src/tasks/providers/task_details_provider.dart';
-import 'package:family/src/tasks/tasks_service.dart';
+import 'package:todo/main.dart';
+import 'package:todo/src/tasks/screens/task_detail_screen.dart';
+import 'package:todo/src/tasks/task_model.dart';
+import 'package:todo/src/tasks/providers/task_details_provider.dart';
+import 'package:todo/src/tasks/tasks_service.dart';
 
 class TaskCard extends StatelessWidget {
   final Task task;

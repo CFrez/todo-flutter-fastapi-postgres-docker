@@ -1,10 +1,10 @@
-import 'package:family/src/tasks/components/tasks_list.dart';
+import 'package:todo/src/tasks/components/tasks_list.dart';
 import 'package:flutter/material.dart';
 
-import 'package:family/main.dart';
-import 'package:family/src/tasks/providers/task_details_provider.dart';
-import 'package:family/src/tasks/providers/tasks_list_provider.dart';
-import 'package:family/src/tasks/screens/task_detail_screen.dart';
+import 'package:todo/main.dart';
+import 'package:todo/src/tasks/providers/task_details_provider.dart';
+import 'package:todo/src/tasks/providers/tasks_list_provider.dart';
+import 'package:todo/src/tasks/screens/task_detail_screen.dart';
 
 class TasksListScreen extends StatefulWidget {
   static const routeName = '/';

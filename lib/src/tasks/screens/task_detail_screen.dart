@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:family/main.dart';
-import 'package:family/src/tasks/providers/task_details_provider.dart';
+import 'package:todo/main.dart';
+import 'package:todo/src/tasks/providers/task_details_provider.dart';
 
 class TaskDetailScreen extends StatefulWidget {
   static const routeName = '/detail';

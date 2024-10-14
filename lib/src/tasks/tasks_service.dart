@@ -1,9 +1,9 @@
-import 'package:family/src/tasks/providers/tasks_list_provider.dart';
-import 'package:family/src/tasks/task_model.dart';
+import 'package:todo/src/tasks/providers/tasks_list_provider.dart';
+import 'package:todo/src/tasks/task_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:family/main.dart';
-import 'package:family/src/utils/api_service.dart';
+import 'package:todo/main.dart';
+import 'package:todo/src/utils/api_service.dart';
 
 const tasksBaseUrl = 'tasks';
 

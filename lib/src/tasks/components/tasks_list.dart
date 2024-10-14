@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:family/src/components/empty_list_indicator.dart';
-import 'package:family/src/tasks/components/task_card.dart';
-import 'package:family/main.dart';
-import 'package:family/src/tasks/providers/tasks_list_provider.dart';
+import 'package:todo/src/components/empty_list_indicator.dart';
+import 'package:todo/src/tasks/components/task_card.dart';
+import 'package:todo/main.dart';
+import 'package:todo/src/tasks/providers/tasks_list_provider.dart';
 
 class TasksList extends StatefulWidget {
   final Function handleAddTask;

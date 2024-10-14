@@ -3,8 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:family/src/tasks/screens/task_detail_screen.dart';
-import 'package:family/src/tasks/screens/tasks_list_screen.dart';
+import 'package:todo/src/tasks/screens/task_detail_screen.dart';
+import 'package:todo/src/tasks/screens/tasks_list_screen.dart';
 
 import 'settings/settings_controller.dart';
 
