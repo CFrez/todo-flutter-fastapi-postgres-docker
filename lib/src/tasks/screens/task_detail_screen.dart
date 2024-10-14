@@ -1,3 +1,5 @@
+import 'package:family/src/components/checkbox_form_field.dart';
+import 'package:family/src/components/date_form_field.dart';
 import 'package:flutter/material.dart';
 
 import 'package:todo/main.dart';
@@ -63,14 +65,33 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Name',
-                    icon: Icon(Icons.person),
+                    labelText: 'Title',
+                    icon: Icon(Icons.task_alt_outlined),
                   ),
                   autofocus: true,
                   onChanged: detailsProvider.setTitle,
                   validator: detailsProvider.validateTitle,
                   initialValue: detailsProvider.task.title,
                 ),
+                SizedBox(height: 8),
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                    icon: Icon(Icons.description),
+                  ),
+                  maxLines: 3, //or
+                  onChanged: detailsProvider.setDescription,
+                  initialValue: detailsProvider.task.description,
+                ),
+                SizedBox(height: 8),
+                CheckboxFormField(
+                  value: detailsProvider.task.isCompleted,
+                  onChanged: detailsProvider.setIsCompleted,
+                  labelText: 'Complete',
+                ),
+                FutureDateFormField(
+                    initialValue: detailsProvider.task.dueDate,
+                    onChanged: detailsProvider.setDueDate),
                 SizedBox(height: 24),
                 if (detailsProvider.isProcessing)
                   Center(

@@ -12,6 +12,7 @@ abstract class TaskDetailsProvider extends ChangeNotifier {
   Task get task;
   bool get isProcessing;
   GlobalKey<FormState> get form;
+  List<Task> get subTasks;
 
   // Operations
   void clearTask();
@@ -25,6 +26,9 @@ abstract class TaskDetailsProvider extends ChangeNotifier {
 
   // Setters
   void setTitle(String title);
+  void setDescription(String description);
+  void setDueDate(DateTime? dueDate);
+  void setIsCompleted(bool? completed);
 }
 
 class TaskDetailsProviderImpl extends TaskDetailsProvider {
@@ -40,6 +44,9 @@ class TaskDetailsProviderImpl extends TaskDetailsProvider {
 
   @override
   GlobalKey<FormState> get form => _form;
+
+  @override
+  List<Task> get subTasks => _task.subTasks;
 
   @override
   void clearTask() {
@@ -100,6 +107,24 @@ class TaskDetailsProviderImpl extends TaskDetailsProvider {
   @override
   void setTitle(String title) {
     _task.title = title;
+    handleUpdate();
+  }
+
+  @override
+  void setDescription(String description) {
+    _task.description = description;
+    handleUpdate();
+  }
+
+  @override
+  void setDueDate(DateTime? dueDate) {
+    _task.dueDate = dueDate;
+    handleUpdate();
+  }
+
+  @override
+  setIsCompleted(completed) {
+    _task.isCompleted = completed ?? _task.isCompleted;
     handleUpdate();
   }
 }
