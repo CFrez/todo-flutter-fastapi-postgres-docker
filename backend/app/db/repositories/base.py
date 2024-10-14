@@ -2,6 +2,7 @@
 
 from abc import ABC
 from typing import List, TypeVar
+import uuid
 
 from fastapi import HTTPException, status
 from loguru import logger
@@ -47,7 +48,7 @@ class SQLAlchemyRepository(ABC):
     filter_schema = FILTER_SCHEMA
 
     def not_found_error(
-        self, id: int, action: str, entity: str = label
+        self, id: uuid.UUID, action: str, entity: str = label
     ) -> HTTPException:
         """Raise 404 error for missing object."""
         logger.warning(f"No {entity} with id = {id}.")
@@ -81,7 +82,7 @@ class SQLAlchemyRepository(ABC):
 
     async def read(
         self,
-        id: int,
+        id: uuid.UUID,
     ) -> sqla_model | None:
         """Get object by id or 404."""
         result = await self.db.get(self.sqla_model, id)
@@ -93,7 +94,7 @@ class SQLAlchemyRepository(ABC):
 
     async def update(
         self,
-        id: int,
+        id: uuid.UUID,
         obj_update: update_schema,
     ) -> sqla_model | None:
         """Update object in db by id or 404."""
@@ -114,7 +115,7 @@ class SQLAlchemyRepository(ABC):
 
     async def delete(
         self,
-        id: int,
+        id: uuid.UUID,
     ) -> sqla_model | None:
         """Delete object from db by id or 404."""
         result = await self.db.get(self.sqla_model, id)
