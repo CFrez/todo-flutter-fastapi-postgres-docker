@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:family/src/components/empty_list_indicator.dart';
-import 'package:family/src/parent/components/parent_card.dart';
+import 'package:family/src/tasks/components/task_card.dart';
 import 'package:family/main.dart';
-import 'package:family/src/parent/providers/parents_list_provider.dart';
+import 'package:family/src/tasks/providers/tasks_list_provider.dart';
 
-class ParentsList extends StatefulWidget {
-  final Function handleAddParent;
-  const ParentsList({super.key, required this.handleAddParent});
+class TasksList extends StatefulWidget {
+  final Function handleAddTask;
+  const TasksList({super.key, required this.handleAddTask});
 
   @override
-  State<ParentsList> createState() => _ParentsListState();
+  State<TasksList> createState() => _TasksListState();
 }
 
-class _ParentsListState extends State<ParentsList> {
-  final listProvider = getIt<ParentsListProvider>();
+class _TasksListState extends State<TasksList> {
+  final listProvider = getIt<TasksListProvider>();
 
   @override
   void initState() {
@@ -30,24 +30,24 @@ class _ParentsListState extends State<ParentsList> {
   }
 
   Future<void> _refreshData() async {
-    await listProvider.fetchItems();
+    await listProvider.fetchTasks();
   }
 
   @override
   Widget build(BuildContext context) {
-    final parents = listProvider.parents;
+    final tasks = listProvider.tasks;
 
     if (listProvider.isLoading) {
       return const Center(
         child: CircularProgressIndicator(),
       );
     }
-    if (parents.isEmpty) {
+    if (tasks.isEmpty) {
       return Center(
         child: EmptyListIndicator(
-          buttonText: 'Add Parent',
+          buttonText: 'Add Task',
           onButtonPressed: () {
-            widget.handleAddParent();
+            widget.handleAddTask();
           },
         ),
       );
@@ -55,11 +55,11 @@ class _ParentsListState extends State<ParentsList> {
     return RefreshIndicator(
       onRefresh: () => _refreshData(),
       child: ListView.builder(
-        itemCount: parents.length,
+        itemCount: tasks.length,
         itemBuilder: (context, index) {
-          final parent = parents.elementAt(index);
-          return ParentCard(
-            parent: parent,
+          final task = tasks.elementAt(index);
+          return TaskCard(
+            task: task,
           );
         },
       ),

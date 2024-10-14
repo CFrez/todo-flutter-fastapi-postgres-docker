@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
 import 'package:family/main.dart';
-import 'package:family/src/parent/screens/parent_detail_screen.dart';
-import 'package:family/src/parent/parent_model.dart';
-import 'package:family/src/parent/providers/parent_details_provider.dart';
-import 'package:family/src/parent/parents_service.dart';
+import 'package:family/src/tasks/screens/task_detail_screen.dart';
+import 'package:family/src/tasks/task_model.dart';
+import 'package:family/src/tasks/providers/task_details_provider.dart';
+import 'package:family/src/tasks/tasks_service.dart';
 
-class ParentCard extends StatelessWidget {
-  final Parent parent;
+class TaskCard extends StatelessWidget {
+  final Task task;
 
-  const ParentCard({super.key, required this.parent});
+  const TaskCard({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: Key(parent.id.toString()),
+      key: Key(task.id.toString()),
       direction: DismissDirection.endToStart,
       onDismissed: (direction) {
         if (direction == DismissDirection.endToStart) {
-          parentsService.deleteParent(parent);
+          tasksService.deleteTask(task);
         }
       },
       background: Container(
@@ -34,12 +34,12 @@ class ParentCard extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.edit, size: 18),
               onPressed: () {
-                getIt<ParentDetailsProvider>().setParent(parent);
-                Navigator.of(context).pushNamed(ParentDetailScreen.routeName);
+                getIt<TaskDetailsProvider>().setTask(task);
+                Navigator.of(context).pushNamed(TaskDetailScreen.routeName);
               },
             ),
             Expanded(
-              child: Text(parent.name),
+              child: Text(task.title),
             ),
           ],
         ),
