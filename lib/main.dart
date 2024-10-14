@@ -1,12 +1,12 @@
-import 'package:family/src/children/providers/child_details_provider.dart';
-import 'package:family/src/parent/providers/parent_details_provider.dart';
-import 'package:family/src/parent/providers/parents_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
+
+import 'package:family/src/tasks/providers/task_details_provider.dart';
+import 'package:family/src/tasks/providers/tasks_list_provider.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -30,16 +30,12 @@ void main() async {
 }
 
 void setupSingletons() {
-  getIt.registerSingleton<ParentsListProvider>(
-    ParentsListProviderImpl(),
+  getIt.registerSingleton<TasksListProvider>(
+    TasksListProviderImpl(),
     signalsReady: true,
   );
-  getIt.registerSingleton<ParentDetailsProvider>(
-    ParentDetailsProviderImpl(),
-    signalsReady: true,
-  );
-  getIt.registerSingleton<ChildDetailsProvider>(
-    ChildDetailsProviderImpl(),
+  getIt.registerSingleton<TaskDetailsProvider>(
+    TaskDetailsProviderImpl(),
     signalsReady: true,
   );
 }
