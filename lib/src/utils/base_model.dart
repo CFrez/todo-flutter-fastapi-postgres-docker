@@ -22,8 +22,12 @@ class BaseModel {
     return date != null ? DateTime.parse(date) : null;
   }
 
-  String formatToDate(DateTime? date) {
-    return date != null ? DateFormat('yyyy-MM-dd').format(date) : '';
+  String? formatToDate(DateTime? date) {
+    return date != null ? DateFormat('yyyy-MM-dd').format(date) : null;
+  }
+
+  String? formatToDateTime(DateTime? date) {
+    return date?.toString();
   }
 
   fromBaseJson(Map<String, dynamic> json) {

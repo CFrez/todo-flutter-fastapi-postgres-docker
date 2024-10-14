@@ -67,9 +67,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     icon: Icon(Icons.person),
                   ),
                   autofocus: true,
-                  onChanged: detailsProvider.setName,
-                  validator: detailsProvider.validateName,
-                  initialValue: detailsProvider.task.name,
+                  onChanged: detailsProvider.setTitle,
+                  validator: detailsProvider.validateTitle,
+                  initialValue: detailsProvider.task.title,
                 ),
                 SizedBox(height: 24),
                 if (detailsProvider.isProcessing)

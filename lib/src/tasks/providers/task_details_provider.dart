@@ -21,10 +21,10 @@ abstract class TaskDetailsProvider extends ChangeNotifier {
   void refreshTask();
 
   // Validation
-  String? validateName(String? value);
+  String? validateTitle(String? value);
 
   // Setters
-  void setName(String name);
+  void setTitle(String title);
 }
 
 class TaskDetailsProviderImpl extends TaskDetailsProvider {
@@ -76,7 +76,7 @@ class TaskDetailsProviderImpl extends TaskDetailsProvider {
         ? await tasksService.create(_task)
         : await tasksService.update(_task);
     _isProcessing = false;
-    // ToastService.success('${savedTask.name} ${isNew ? 'added' : 'updated'}');
+    // ToastService.success('${savedTask.title} ${isNew ? 'added' : 'updated'}');
     return savedTask;
   }
 
@@ -85,21 +85,21 @@ class TaskDetailsProviderImpl extends TaskDetailsProvider {
     _isProcessing = true;
     await tasksService.deleteTask(task);
     _isProcessing = false;
-    // ToastService.success('${task.name} deleted');
+    // ToastService.success('${task.title} deleted');
     handleUpdate();
   }
 
   @override
-  String? validateName(String? value) {
+  String? validateTitle(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Task Name is Required';
+      return 'Task Title is Required';
     }
     return null;
   }
 
   @override
-  void setName(String name) {
-    _task.name = name;
+  void setTitle(String title) {
+    _task.title = title;
     handleUpdate();
   }
 }

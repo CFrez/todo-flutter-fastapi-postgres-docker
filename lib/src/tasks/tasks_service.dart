@@ -12,32 +12,32 @@ class TasksService extends ApiService {
 
   Future<List<Task>> list() async {
     final data = await getList(tasksBaseUrl);
-    tasks = data.map((parent) => Task.fromJson(parent)).toList();
+    tasks = data.map((task) => Task.fromJson(task)).toList();
     return tasks;
   }
 
-  Future<Task> create(Task parent) async {
-    final data = await post(tasksBaseUrl, parent.toJson());
-    // add parent vs refetch?
+  Future<Task> create(Task task) async {
+    final data = await post(tasksBaseUrl, task.toJson());
+    // add task vs refetch?
     final groceryItem = Task.fromJson(data);
     getIt<TasksListProvider>().fetchTasks();
     return groceryItem;
   }
 
-  Future<Task> read(String parentId) async {
-    final data = await get('$tasksBaseUrl/$parentId');
+  Future<Task> read(String taskId) async {
+    final data = await get('$tasksBaseUrl/$taskId');
     return Task.fromJson(data);
   }
 
-  Future<Task> update(Task parent) async {
-    final data = await patch('$tasksBaseUrl/${parent.id}', parent.toJson());
+  Future<Task> update(Task task) async {
+    final data = await patch('$tasksBaseUrl/${task.id}', task.toJson());
     final groceryItem = Task.fromJson(data);
     getIt<TasksListProvider>().fetchTasks();
     return groceryItem;
   }
 
-  Future<void> deleteTask(Task parent) async {
-    await super.delete('$tasksBaseUrl/${parent.id}');
+  Future<void> deleteTask(Task task) async {
+    await super.delete('$tasksBaseUrl/${task.id}');
     getIt<TasksListProvider>().fetchTasks();
   }
 }

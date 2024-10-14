@@ -39,7 +39,7 @@ class TaskCard extends StatelessWidget {
               },
             ),
             Expanded(
-              child: Text(task.name),
+              child: Text(task.title),
             ),
           ],
         ),
